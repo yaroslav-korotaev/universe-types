@@ -1,0 +1,11 @@
+source: ../templates/lib
+data:
+  name: universe-types
+  version: "0.1.0"
+  description: Universe types could be seen everywhere
+  keywords:
+    - typescript
+    - universe
+    - types
+  author: Yaroslav Korotaev <yaroslav.korotaev@gmail.com>
+  repo: yaroslav-korotaev/universe-types
