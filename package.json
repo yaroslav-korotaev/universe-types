@@ -1,12 +1,6 @@
 {
   "name": "universe-types",
-  "version": "1.0.0",
-  "description": "Universe types could be seen everywhere",
-  "keywords": [
-    "typescript",
-    "universe",
-    "types"
-  ],
+  "version": "1.1.0",
   "bugs": "https://github.com/yaroslav-korotaev/universe-types/issues",
   "license": "MIT",
   "author": "Yaroslav Korotaev <yaroslav.korotaev@gmail.com>",
@@ -19,7 +13,7 @@
   "scripts": {},
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.14.0",
     "typescript": "^5.4.5"
   }
 }

@@ -1,5 +1,4 @@
 export type AsyncFunction<T, A extends any[], R> = (this: T, ...args: A) => Promise<R>;
-export type SpanCallback<T> = (span: Span) => Promise<T>;
 
 export type Span = {
   origin: Tracing;
@@ -14,9 +13,11 @@ export type Span = {
   trace(details?: object, msg?: string): void;
 };
 
+export type SpanCallback<T> = (span: Span) => Promise<T>;
+
 export type Tracing = {
-  name: string;
-  child(name: string): Tracing;
+  tag: string;
+  child(tag: string): Tracing;
   head(): Span;
   span<T>(name: string, callback: SpanCallback<T>): Promise<T>;
   wrap<T, A extends any[], R>(name: string, fn: AsyncFunction<T, A, R>): AsyncFunction<T, A, R>;

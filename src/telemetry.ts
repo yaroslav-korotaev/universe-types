@@ -1,15 +1,44 @@
+import { type Labels } from './common';
+import { type LogFn, type Log } from './log';
+import {
+  type CounterParams,
+  type Counter,
+  type GaugeParams,
+  type Gauge,
+  type HistogramParams,
+  type Histogram,
+  type SummaryParams,
+  type Summary,
+  type Metrics,
+} from './metrics';
 import { type AsyncFunction, type SpanCallback, type Tracing } from './tracing';
 
+export type TelemetryChildOptions = {
+  labels?: Labels;
+  details?: object;
+};
+
 export type Telemetry = {
-  (msg?: string): void;
-  (details?: object, msg?: string): void;
-  
+  log: Log;
+  metrics: Metrics;
   tracing: Tracing;
   
-  child(name: string): Telemetry;
+  destroy(): void;
+  child(tag: string, options?: TelemetryChildOptions): Telemetry;
+  
+  debug: LogFn;
+  info: LogFn;
+  warn: LogFn;
+  error: LogFn;
+  
+  counter(params: CounterParams): Counter;
+  gauge(params: GaugeParams): Gauge;
+  histogram(params: HistogramParams): Histogram;
+  summary(params: SummaryParams): Summary;
   
   span<T>(name: string, callback: SpanCallback<T>): Promise<T>;
   wrap<T, A extends any[], R>(name: string, fn: AsyncFunction<T, A, R>): AsyncFunction<T, A, R>;
+  
   trace(msg?: string): void;
   trace(details?: object, msg?: string): void;
 };
