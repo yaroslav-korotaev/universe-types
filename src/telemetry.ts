@@ -11,7 +11,13 @@ import {
   type Summary,
   type Metrics,
 } from './metrics';
-import { type AsyncFunction, type SpanCallback, type Tracing } from './tracing';
+import {
+  type AsyncFunction,
+  type SpanCallback,
+  type TracingSpanOptions,
+  type TracingWrapOptions,
+  type Tracing,
+} from './tracing';
 
 export type TelemetryChildOptions = {
   labels?: Labels;
@@ -36,8 +42,16 @@ export type Telemetry = {
   histogram(params: HistogramParams): Histogram;
   summary(params: SummaryParams): Summary;
   
-  span<T>(name: string, callback: SpanCallback<T>): Promise<T>;
-  wrap<T, A extends any[], R>(name: string, fn: AsyncFunction<T, A, R>): AsyncFunction<T, A, R>;
+  span<T>(
+    name: string,
+    callback: SpanCallback<T>,
+    options?: TracingSpanOptions,
+  ): Promise<T>;
+  wrap<T, A extends any[], R>(
+    name: string,
+    fn: AsyncFunction<T, A, R>,
+    options?: TracingWrapOptions,
+  ): AsyncFunction<T, A, R>;
   
   trace(msg?: string): void;
   trace(details?: object, msg?: string): void;
